@@ -1,2 +1,4 @@
 lambeq
 pandas
+ipykernel
+pennylane
