@@ -2,3 +2,4 @@ lambeq
 pandas
 ipykernel
 pennylane
+torch
