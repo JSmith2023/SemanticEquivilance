@@ -1,8 +1,9 @@
 # --- Data and Preprocessing Configuration ---
 data:
   path: '<ABSOLUTE_PATH_TO_YOUR_QUESTIONS.CSV>'
-  sample_fraction: 0.01
+  sample_fraction: 0.1
   qubit_limit: 12
+  test_size: 0.2  # Proportion of data to use for testing
 
 # --- Model and QNLP Circuit Configuration ---
 qnlp:
