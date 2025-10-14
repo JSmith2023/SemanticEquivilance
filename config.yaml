@@ -1,0 +1,21 @@
+# --- Data and Preprocessing Configuration ---
+data:
+  path: '<ABSOLUTE_PATH_TO_YOUR_QUESTIONS.CSV>'
+  sample_fraction: 0.01
+  qubit_limit: 12
+
+# --- Model and QNLP Circuit Configuration ---
+qnlp:
+  n_layers: 1
+  # Available embedding methods: 'simple_pad', 'superposition', 'entangle'
+  embedding_method: 'entangle' 
+  rewrite_rules:
+    - 'curry'
+    - 'prepositional_phrase'
+    - 'determiner'
+
+# --- Training Configuration ---
+training:
+  epochs: 15
+  base_learning_rate: 0.01
+  lambda_penalty: 0.1
