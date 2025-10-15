@@ -1,7 +1,7 @@
 # --- Data and Preprocessing Configuration ---
 data:
   path: '<ABSOLUTE_PATH_TO_YOUR_QUESTIONS.CSV>'
-  sample_fraction: 0.1
+  sample_fraction: 0.05 # Fraction of data to sample for quicker testing (0.1 = 24 hrs roughly)
   qubit_limit: 12
   test_size: 0.2  # Proportion of data to use for testing
 
@@ -20,7 +20,7 @@ training:
   # NEW: Choose the training algorithm.
   # Options: 'state_vector' (fast, default) or 'process_tomography' (slow, advanced)
   algorithm: 'state_vector' 
-  epochs: 15
+  epochs: 5
   base_learning_rate: 0.01
   lambda_penalty: 0.1
 simulation:
