@@ -1,6 +1,7 @@
 # --- Data and Preprocessing Configuration ---
 data:
   path: '<ABSOLUTE_PATH_TO_YOUR_QUESTIONS.CSV>' # <-- IMPORTANT: User must change this
+  fasttext_path: '<ABSOLUTE_PATH_TO_YOUR_FASTTEXT_EMBEDDINGS>' # <-- IMPORTANT: User must change this
   sample_fraction: 0.1
   qubit_limit: 12
   test_size: 0.2  # Proportion of data to use for testing
@@ -8,7 +9,7 @@ data:
 qnlp:
   n_layers: 1
   # Available embedding methods: 'simple_pad', 'superposition', 'entangle'
-  embedding_method: 'entangle' 
+  embedding_method: 'entangle' #Options: 'simple_pad', 'superposition', 'entangle', 'parameterized'
   rewrite_rules:
     - 'curry'
     - 'prepositional_phrase'
@@ -20,4 +21,5 @@ training:
   base_learning_rate: 0.01
   lambda_penalty: 0.1
 simulation:
+  device: "lightning.gpu" # Options: "lightning.qubit", "lightning.gpu", "default.qubit"
   cpu_cores: 6
