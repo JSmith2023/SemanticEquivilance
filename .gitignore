@@ -210,3 +210,4 @@ __marimo__/
 *.zip
 *.csv
 *.vec
+config.yaml
