@@ -17,9 +17,6 @@ qnlp:
 
 # --- Training Configuration ---
 training:
-  # NEW: Choose the training algorithm.
-  # Options: 'state_vector' (fast, default) or 'process_tomography' (slow, advanced)
-  algorithm: 'state_vector' 
   epochs: 5
   base_learning_rate: 0.01
   lambda_penalty: 0.1
