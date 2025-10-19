@@ -209,5 +209,6 @@ __marimo__/
 #Dataset
 *.zip
 *.csv
-*.vec
+*.bin
+*.gz
 config.yaml
