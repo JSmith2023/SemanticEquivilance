@@ -15,6 +15,7 @@ qnlp:
     - curry
     # - prepositional_phrase # Often causes issues with IQP/SEA
     - determiner
+    - 'remove_punctuation'
   embedding_method: 'parameterized' #Padding for SWAP test Options: 'simple_pad', 'superposition', 'entangle', 'parameterized'
 
 # === NLP Configuration ===
