@@ -1,25 +1,39 @@
-# --- Data and Preprocessing Configuration ---
+# === Data Configuration ===
 data:
-  path: '<ABSOLUTE_PATH_TO_YOUR_QUESTIONS.CSV>' # <-- IMPORTANT: User must change this
-  fasttext_path: '<ABSOLUTE_PATH_TO_YOUR_FASTTEXT_EMBEDDINGS>' # <-- IMPORTANT: User must change this
-  sample_fraction: 0.1
-  qubit_limit: 12
-  test_size: 0.2  # Proportion of data to use for testing
-# --- Model and QNLP Circuit Configuration ---
-qnlp:
-  n_layers: 1
-  # Available embedding methods: 'simple_pad', 'superposition', 'entangle'
-  embedding_method: 'entangle' #Options: 'simple_pad', 'superposition', 'entangle', 'parameterized'
-  rewrite_rules:
-    - 'curry'
-    - 'prepositional_phrase'
-    - 'determiner'
+  fasttext_path: <PATH_TO_FASTTEXT_BIN\cc.en.300.bin> # Path to .bin model
+  path: <PATH_TO_DATASET\questions.csv> # Path to sentence pairs
+  qubit_limit: 12            # Max qubits allowed per sentence circuit (20 absolute max)
+  sample_fraction: 0.05      # Fraction of dataset to load (e.g., 0.05 for 5%)
+  test_size: 0.2             # Fraction of filtered data for the test set (e.g., 0.2 for 20%)
+  validation_size: 0.25      # Fraction of remaining data for validation (e.g., 0.25 of train+val = 20% of total)
 
-# --- Training Configuration ---
-training:
-  epochs: 15
-  base_learning_rate: 0.01
-  lambda_penalty: 0.1
+# === QNLP Configuration ===
+qnlp:
+  ansatz_type: 'StronglyEntangling'         # Type of ansatz: 'IQP' or 'StronglyEntangling'
+  n_layers: 2                # Number of layers for the chosen ansatz(1-3)
+  rewrite_rules:             # List of lambeq rewrite rules to apply
+    - curry
+    # - prepositional_phrase # Often causes issues with IQP/SEA
+    - determiner
+  embedding_method: 'parameterized' #Padding for SWAP test Options: 'simple_pad', 'superposition', 'entangle', 'parameterized'
+
+# === NLP Configuration ===
+nlp:
+  spacy_model: 'en_core_web_sm' # SpaCy model for tokenization
+
+# === Simulation Configuration ===
 simulation:
-  device: "lightning.gpu" # Options: "lightning.qubit", "lightning.gpu", "default.qubit"
-  cpu_cores: 6
+  cpu_cores: 6               # Max CPU cores for simulator (if supported)
+  device: 'lightning.qubit'    # PennyLane device: 'default.qubit', 'lightning.qubit', etc.
+
+# === Training Configuration ===
+training:
+  use_local_cost: True       # Use local MSE cost (True) or global SWAP test cost (False)
+  base_learning_rate: 0.001  # Initial learning rate for Adam optimizer
+  epochs: 5                  # Number of training epochs
+  lambda_penalty: 0.1        # Weight for the structural disparity penalty
+
+# === Logging Configuration ===
+logging:
+  log_file: 'error_log.txt'  # File to write exceptions to
+  log_level: 'WARNING'       # Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
